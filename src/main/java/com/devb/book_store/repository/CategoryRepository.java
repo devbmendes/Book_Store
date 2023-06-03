@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.devb.book_store.entity.Category;
 
-@Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
 
 }

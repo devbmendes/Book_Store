@@ -9,15 +9,15 @@ import com.devb.book_store.DTO.AuthorDTO;
 import com.devb.book_store.entity.Author;
 import com.devb.book_store.repository.AuthorRepositoy;
 
-public class AuthorServiceImp implements AuthorService{
-	
+public class AuthorServiceImp implements AuthorService {
+
 	@Autowired
 	AuthorRepositoy authorRepositoy;
 
 	@Override
 	public Author findByEmail(String email) {
 		Optional<Author> autorOptional = authorRepositoy.findByEmail(email);
-		if(autorOptional.isPresent()) {
+		if (autorOptional.isPresent()) {
 			return autorOptional.get();
 		}
 		return null;
@@ -25,7 +25,7 @@ public class AuthorServiceImp implements AuthorService{
 
 	@Override
 	public List<Author> getAll() {
-	
+
 		List<Author> lstAuthors = authorRepositoy.findAll();
 		return lstAuthors;
 	}
@@ -33,7 +33,7 @@ public class AuthorServiceImp implements AuthorService{
 	@Override
 	public Author findById(Integer id) {
 		Optional<Author> author = authorRepositoy.findById(id);
-		if(author.isPresent()) {
+		if (author.isPresent()) {
 			return author.get();
 		}
 		return null;
@@ -41,8 +41,23 @@ public class AuthorServiceImp implements AuthorService{
 
 	@Override
 	public Author update(Integer id, AuthorDTO authorDTO) {
-		Author author = new Author(id,authorDTO.getFirstname(),authorDTO.getLastname(),authorDTO.getEmail());
+		Author author = new Author(id, authorDTO.getFirstname(), authorDTO.getLastname(), authorDTO.getEmail());
 		return authorRepositoy.save(author);
+	}
+
+	@Override
+	public Author save(AuthorDTO authorDTO) {
+		checkIfEmailisPresent(authorDTO.getEmail());
+		Author author = new Author(null, authorDTO.getFirstname(), authorDTO.getLastname(), authorDTO.getEmail());
+
+		return authorRepositoy.save(author);
+	}
+
+	@Override
+	public Author checkIfEmailisPresent(String email) {
+		Optional<Author> authorOptional = authorRepositoy.findByEmail(email);
+
+		return authorOptional.orElseThrow();
 	}
 
 }
