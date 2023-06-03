@@ -1,38 +1,59 @@
 package com.devb.book_store.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category {
-	
+
 	private Integer id;
-	private Type type;
+	private String type;
 	private String desc;
-	public Category(Integer id, Type type, String desc) {
-		super();
+
+	private List<Book> books = new ArrayList<>();
+
+	public Category(Integer id, String type, String desc) {
 		this.id = id;
-		this.type = type;
+		Type setCt = setType(type);
+		this.type = setCt.getValue();
 		this.desc = desc;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Type getType() {
+
+	public String getType() {
 		return type;
 	}
-	public void setType(Type type) {
-		this.type = type;
+
+	public static Type setType(String typename) {
+
+		if (typename == null) {
+			return null;
+		}
+
+		for (Type type : Type.values()) {
+			if (typename.equalsIgnoreCase(type.getValue())) {
+				return type;
+			}
+		}
+		throw new IllegalArgumentException("Category Type -" + typename + "- invalid ");
 	}
+
 	public String getDesc() {
 		return desc;
 	}
+
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+
 	public Category() {
-		
+
 	}
-	
-	
 
 }
