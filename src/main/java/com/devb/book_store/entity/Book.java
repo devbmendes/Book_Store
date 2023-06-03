@@ -26,6 +26,7 @@ public class Book {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "book_id", referencedColumnName = "id")
 	private Category category;
+	@ManyToMany
 	private List<Author> authors = new ArrayList<>();
 
 	public Integer getId() {
