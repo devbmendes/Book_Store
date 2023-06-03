@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Autor {
+public class Author {
 
 	private Integer id;
 	private String firstname;
@@ -45,7 +45,7 @@ public class Autor {
 		this.email = email;
 	}
 
-	public Autor(Integer id, String firstname, String lastname, String email) {
+	public Author(Integer id, String firstname, String lastname, String email) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -53,7 +53,7 @@ public class Autor {
 		this.email = email;
 	}
 
-	public Autor() {
+	public Author() {
 		
 	}
 
@@ -70,7 +70,7 @@ public class Autor {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Autor other = (Autor) obj;
+		Author other = (Author) obj;
 		return Objects.equals(id, other.id);
 	}
 	
