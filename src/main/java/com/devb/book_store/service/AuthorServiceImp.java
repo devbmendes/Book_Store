@@ -17,10 +17,9 @@ public class AuthorServiceImp implements AuthorService {
 	@Override
 	public Author findByEmail(String email) {
 		Optional<Author> autorOptional = authorRepositoy.findByEmail(email);
-		if (autorOptional.isPresent()) {
-			return autorOptional.get();
-		}
-		return null;
+		
+		return autorOptional.orElseThrow(()->
+		new ObjectNotFoundException("Author with EMAIL: "+email+ "not found"));
 	}
 
 	@Override
@@ -33,10 +32,9 @@ public class AuthorServiceImp implements AuthorService {
 	@Override
 	public Author findById(Integer id) {
 		Optional<Author> author = authorRepositoy.findById(id);
-		if (author.isPresent()) {
-			return author.get();
-		}
-		return null;
+		
+		return author.orElseThrow(()->
+		new ObjectNotFoundException("Author with ID: "+id+" not found"));
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.devb.book_store.repository;
+package com.devb.book_store.controller;
 
 import java.time.LocalDate;
 
