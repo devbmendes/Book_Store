@@ -4,13 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="author_tb")
 public class Author {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String firstname;
 	private String lastname;
 	private String email;
 	
+	@ManyToMany
+	@JoinTable(
+			name="author_books",
+			joinColumns =@JoinColumn(name="author_id"),
+			inverseJoinColumns = @JoinColumn(name = "books_id")
+			)
 	private List<Book> books = new ArrayList<>();
 
 	public Integer getId() {
@@ -54,7 +73,7 @@ public class Author {
 	}
 
 	public Author() {
-		
+
 	}
 
 	@Override
@@ -73,6 +92,5 @@ public class Author {
 		Author other = (Author) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
 }
