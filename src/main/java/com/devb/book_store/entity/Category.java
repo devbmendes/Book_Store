@@ -25,8 +25,7 @@ public class Category {
 
 	public Category(Integer id, String type, String desc) {
 		this.id = id;
-		Type setCt = setType(type);
-		this.type = setCt.getValue();
+		this.type = type;
 		this.desc = desc;
 	}
 
@@ -40,20 +39,6 @@ public class Category {
 
 	public String getType() {
 		return type;
-	}
-
-	public static Type setType(String typename) {
-
-		if (typename == null) {
-			return null;
-		}
-
-		for (Type type : Type.values()) {
-			if (typename.equalsIgnoreCase(type.getValue())) {
-				return type;
-			}
-		}
-		throw new IllegalArgumentException("Category Type -" + typename + "- invalid ");
 	}
 
 	public String getDesc() {
