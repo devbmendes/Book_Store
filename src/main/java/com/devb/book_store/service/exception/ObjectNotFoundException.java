@@ -1,4 +1,4 @@
-package com.devb.book_store.service;
+package com.devb.book_store.service.exception;
 
 public class ObjectNotFoundException extends RuntimeException{
 

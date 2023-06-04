@@ -1,4 +1,4 @@
-package com.devb.book_store.controller;
+package com.devb.book_store.controller.exceptionHandler;
 
 import java.time.LocalDate;
 
