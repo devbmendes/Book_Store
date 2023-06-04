@@ -1,15 +1,21 @@
 package com.devb.book_store.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-import com.devb.book_store.repository.CategoryRepository;
+import com.devb.book_store.entity.Category;
 
-@Service
-public class CategoryService {
+public interface CategoryService {
 
-	@Autowired
-	CategoryRepository categoryRepository;
+	public Category save(Category category);
+	
+	public Category findById(Integer id);
+	
+	public List<Category> getAll();
+	
+	public Category update(Category category);
+	
+	public void delete(Integer id);
+	
 	
 	
 
