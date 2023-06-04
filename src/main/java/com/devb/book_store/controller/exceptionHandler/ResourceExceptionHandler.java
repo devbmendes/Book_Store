@@ -1,9 +1,14 @@
 package com.devb.book_store.controller.exceptionHandler;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -26,6 +31,23 @@ public class ResourceExceptionHandler {
 		ResponseError responseError = new ResponseError(LocalDate.now(),HttpStatus.BAD_REQUEST.value(),ex.getMessage());
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseError);
+		
+	}
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<ResponseError> objectNotFoundException(MethodArgumentNotValidException ex, BindingResult bindingResult){
+		ValidationError validationError = new ValidationError(LocalDate.now(),HttpStatus.BAD_REQUEST.value(),
+				"Validations Field Error");
+		List<FieldError> list = new ArrayList<>();
+		FieldError fieldError = new FieldError();
+		
+		ex.getBindingResult().getAllErrors().forEach((error)->{
+			fieldError.setMessage(error.getDefaultMessage());
+			list.add(fieldError);
+		});
+		
+		validationError.setErrors(list);
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationError);
 		
 	}
 

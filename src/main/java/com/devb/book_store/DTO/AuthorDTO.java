@@ -1,15 +1,20 @@
 package com.devb.book_store.DTO;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 public class AuthorDTO {
 
 	@NotEmpty(message="First Name field is required")
+	@NotBlank
 	private String firstname;
 	@NotEmpty(message="Last Name field is required")
+	@NotBlank
 	private String lastname;
-	@Email
+	@Email(message = "Insert a valid email")
+	@NotEmpty
+	@NotBlank
 	private String email;
 
 	public AuthorDTO() {

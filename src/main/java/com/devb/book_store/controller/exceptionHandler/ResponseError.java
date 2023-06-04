@@ -7,6 +7,8 @@ public class ResponseError {
 	private LocalDate localDate;
 	private Integer codeError;
 	private String msg;
+	
+	
 	public LocalDate getLocalDate() {
 		return localDate;
 	}
