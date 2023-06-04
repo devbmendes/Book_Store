@@ -42,6 +42,7 @@ public class AuthorServiceImp implements AuthorService {
 
 	@Override
 	public Author update(Integer id, AuthorDTO authorDTO) {
+		
 		checkIfEmailisPresent(authorDTO.getEmail(), id);
 		Author author = new Author(id, authorDTO.getFirstname(), authorDTO.getLastname(), authorDTO.getEmail());
 		return authorRepositoy.save(author);
@@ -59,11 +60,10 @@ public class AuthorServiceImp implements AuthorService {
 	}
 
 	@Override
-	public Author checkIfEmailisPresent(String email, Integer id) {
+	public void checkIfEmailisPresent(String email, Integer id) {
 		Optional<Author> authorOptional = authorRepositoy.findByEmail(email);
 		if (authorOptional.isPresent() && !authorOptional.get().getId().equals(id)) {
 			throw new DataIntegratyViolationException("Author with EMAIL : " + email + " is already Present");
 		}
-		return authorOptional.get();
 	}
 }
