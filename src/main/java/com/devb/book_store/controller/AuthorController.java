@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devb.book_store.DTO.AuthorDTO;
@@ -38,6 +39,10 @@ public class AuthorController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Author> update(@PathVariable Integer id,AuthorDTO authorDTO){
 		Author author = authorService.update(id, authorDTO);
+		return ResponseEntity.status(HttpStatus.OK).body(author);
+	}
+	public ResponseEntity<Author> findByEMail(@RequestParam String email){
+		Author author = authorService.findByEmail(email);
 		return ResponseEntity.status(HttpStatus.OK).body(author);
 	}
 	
