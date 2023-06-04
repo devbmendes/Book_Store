@@ -18,6 +18,8 @@ import com.devb.book_store.DTO.AuthorDTO;
 import com.devb.book_store.entity.Author;
 import com.devb.book_store.service.AuthorService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/store/author")
 public class AuthorController {
@@ -32,7 +34,7 @@ public class AuthorController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Author> save(AuthorDTO authorDTO) {
+	public ResponseEntity<Author> save(@Valid AuthorDTO authorDTO) {
 		Author author = authorService.save(authorDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(author);
 	}
@@ -44,7 +46,7 @@ public class AuthorController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Author> update(@PathVariable Integer id,@RequestBody AuthorDTO authorDTO) {
+	public ResponseEntity<Author> update(@PathVariable Integer id,@Valid @RequestBody AuthorDTO authorDTO) {
 		Author author = authorService.update(id, authorDTO);
 		return ResponseEntity.status(HttpStatus.OK).body(author);
 	}
