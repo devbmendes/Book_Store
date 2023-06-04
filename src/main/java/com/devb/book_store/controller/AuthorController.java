@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.devb.book_store.DTO.AuthorDTO;
 import com.devb.book_store.entity.Author;
 import com.devb.book_store.service.AuthorService;
 
@@ -25,5 +27,12 @@ public class AuthorController {
 		List<Author> listAuthors = authorService.getAll();
 		return ResponseEntity.status(HttpStatus.OK).body( listAuthors);
 	}
+	
+	@PostMapping
+	public ResponseEntity<Author> save(AuthorDTO authorDTO) {
+		Author author = authorService.save(authorDTO);
+		return ResponseEntity.status(HttpStatus.CREATED).body(author);
+	}
+	
 
 }
