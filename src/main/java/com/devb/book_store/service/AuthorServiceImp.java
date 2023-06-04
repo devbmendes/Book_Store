@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.devb.book_store.DTO.AuthorDTO;
 import com.devb.book_store.entity.Author;
 import com.devb.book_store.repository.AuthorRepositoy;
+import com.devb.book_store.service.exception.DataIntegratyViolationException;
 import com.devb.book_store.service.exception.ObjectNotFoundException;
 
 @Service
@@ -20,9 +21,9 @@ public class AuthorServiceImp implements AuthorService {
 	@Override
 	public Author findByEmail(String email) {
 		Optional<Author> autorOptional = authorRepositoy.findByEmail(email);
-		
-		return autorOptional.orElseThrow(()->
-		new ObjectNotFoundException("Author with EMAIL: "+email+ "not found"));
+
+		return autorOptional
+				.orElseThrow(() -> new ObjectNotFoundException("Author with EMAIL: " + email + "not found"));
 	}
 
 	@Override
@@ -35,33 +36,34 @@ public class AuthorServiceImp implements AuthorService {
 	@Override
 	public Author findById(Integer id) {
 		Optional<Author> author = authorRepositoy.findById(id);
-		
-		return author.orElseThrow(()->
-		new ObjectNotFoundException("Author with ID: "+id+" not found"));
+
+		return author.orElseThrow(() -> new ObjectNotFoundException("Author with ID: " + id + " not found"));
 	}
 
 	@Override
 	public Author update(Integer id, AuthorDTO authorDTO) {
-		Author autOptional = findById(id);
-		Optional<Author> auOptional = authorRepositoy.findByEmail(authorDTO.getEmail());
-		//if(autOptional.getEmail().equalsIgnoreCase(authorDTO.getEmail()))
+		checkIfEmailisPresent(authorDTO.getEmail(), id);
 		Author author = new Author(id, authorDTO.getFirstname(), authorDTO.getLastname(), authorDTO.getEmail());
 		return authorRepositoy.save(author);
 	}
 
 	@Override
 	public Author save(AuthorDTO authorDTO) {
-		checkIfEmailisPresent(null,authorDTO.getEmail());
+		Optional<Author> at = authorRepositoy.findByEmail(authorDTO.getEmail());
+		if (at.isPresent()) {
+			throw new DataIntegratyViolationException("EMAIL : " + authorDTO.getEmail() + "already exist");
+		}
 		Author author = new Author(null, authorDTO.getFirstname(), authorDTO.getLastname(), authorDTO.getEmail());
 
 		return authorRepositoy.save(author);
 	}
 
 	@Override
-	public Author checkIfEmailisPresent(Integer id, String email) {
+	public Author checkIfEmailisPresent(String email, Integer id) {
 		Optional<Author> authorOptional = authorRepositoy.findByEmail(email);
-
-		return authorOptional.orElseThrow();
+		if (authorOptional.isPresent() && !authorOptional.get().getId().equals(id)) {
+			throw new DataIntegratyViolationException("Author with EMAIL : " + email + " is already Present");
+		}
+		return authorOptional.get();
 	}
-
 }

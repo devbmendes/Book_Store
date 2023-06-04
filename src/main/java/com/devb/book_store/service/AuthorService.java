@@ -17,7 +17,7 @@ public interface AuthorService {
 	
 	public Author update(Integer id,AuthorDTO  authorDTO);
 	
-	public Author checkIfEmailisPresent(Integer is, String email);
+	public Author checkIfEmailisPresent(String email,Integer id);
 	
 
 }
