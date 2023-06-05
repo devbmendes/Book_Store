@@ -29,7 +29,7 @@ public class Book {
 	private Category category;
 	
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<Author> authors = new ArrayList<>();
 
 	

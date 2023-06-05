@@ -66,4 +66,11 @@ public class AuthorServiceImp implements AuthorService {
 			throw new DataIntegratyViolationException("Author with EMAIL : " + email + " is already Present");
 		}
 	}
+
+	@Override
+	public void delete(Integer id) {
+		findById(id);
+		authorRepositoy.deleteById(id);
+		
+	}
 }

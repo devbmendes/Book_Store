@@ -19,5 +19,7 @@ public interface AuthorService {
 	
 	public void checkIfEmailisPresent(String email,Integer id);
 	
+	public void delete(Integer id);
+	
 
 }

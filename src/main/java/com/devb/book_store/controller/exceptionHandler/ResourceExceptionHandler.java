@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.devb.book_store.service.exception.DataIntegratyViolationException;
-import com.devb.book_store.service.exception.HttpRequestMethodNotSupportedException;
 import com.devb.book_store.service.exception.ObjectNotFoundException;
 
 @RestControllerAdvice
