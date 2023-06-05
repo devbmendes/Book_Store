@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.devb.book_store.DTO.AuthorDTO;
@@ -70,7 +71,12 @@ public class AuthorServiceImp implements AuthorService {
 	@Override
 	public void delete(Integer id) {
 		findById(id);
-		authorRepositoy.deleteById(id);
+		try {
+			authorRepositoy.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegratyViolationException("OBject cannot be deleted");
+		}
+		
 		
 	}
 }

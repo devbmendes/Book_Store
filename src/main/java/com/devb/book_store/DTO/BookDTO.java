@@ -1,5 +1,7 @@
 package com.devb.book_store.DTO;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
@@ -7,8 +9,9 @@ import lombok.Data;
 @Data
 public class BookDTO {
 
-	@NotEmpty(message = "Field Required")
+	@NotEmpty(message = "Field NAME Required")
 	@NotBlank
+	@Length(min = 3, max = 100, message = "Must be between 3 to 100 charater")
 	private String nome;
 	private String desc;
 	@NotBlank

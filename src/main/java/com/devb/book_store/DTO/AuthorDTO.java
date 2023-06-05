@@ -1,16 +1,20 @@
 package com.devb.book_store.DTO;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 public class AuthorDTO {
 
-	@NotEmpty(message="First Name field is required")
+	@NotEmpty(message="First NAME field is required")
 	@NotBlank
+	@Length(min = 3, max = 100, message = "Must be between 3 to 100 charater")
 	private String firstname;
-	@NotEmpty(message="Last Name field is required")
+	@NotEmpty(message="Field LAST NAME field is required")
 	@NotBlank
+	@Length(min = 3, max = 100, message = "Must be between 3 to 100 charater")
 	private String lastname;
 	@Email(message = "Insert a valid email")
 	@NotEmpty
