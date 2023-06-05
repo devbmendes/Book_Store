@@ -21,7 +21,7 @@ import com.devb.book_store.service.AuthorService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/store/author")
+@RequestMapping("/v1/store/author")
 public class AuthorController {
 
 	@Autowired

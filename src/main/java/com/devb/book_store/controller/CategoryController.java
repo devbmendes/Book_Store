@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,11 +17,17 @@ import com.devb.book_store.entity.Category;
 import com.devb.book_store.service.CategoryService;
 
 @RestController
-@RequestMapping("api/v1/store/category")
+@RequestMapping("/v1/store/category")
 public class CategoryController {
 	
 	@Autowired
 	CategoryService categoryService;
+	
+	@PostMapping
+	public ResponseEntity<Category> save(@RequestBody Category category){
+		Category ct = categoryService.save(category);
+		return ResponseEntity.status(HttpStatus.CREATED).body(ct);
+	}
 	
 	@GetMapping("/all")
 	public ResponseEntity<List<Category>> findAll(){

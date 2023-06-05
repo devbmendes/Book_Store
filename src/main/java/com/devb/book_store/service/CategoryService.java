@@ -18,6 +18,6 @@ public interface CategoryService {
 	
 	public Category findByType(String type);
 	
-	public Category ifIsPresent(String type);
+	public void ifIsPresent(String type);
 
 }
