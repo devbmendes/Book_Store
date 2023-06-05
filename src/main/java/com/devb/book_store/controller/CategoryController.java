@@ -21,29 +21,30 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/v1/store/category")
 public class CategoryController {
-	
+
 	@Autowired
 	CategoryService categoryService;
-	
+
 	@PostMapping
-	public ResponseEntity<Category> save(@Valid	@RequestBody Category category){
-		Category ct = categoryService.save(category);
-		return ResponseEntity.status(HttpStatus.CREATED).body(ct);
+	public ResponseEntity<Category> save(@Valid @RequestBody Category category) {
+		Category ctg = categoryService.save(category);
+		return ResponseEntity.status(HttpStatus.CREATED).body(ctg);
 	}
-	
+
 	@GetMapping("/all")
-	public ResponseEntity<List<Category>> findAll(){
-		List<Category> categories= categoryService.getAll();		
+	public ResponseEntity<List<Category>> findAll() {
+		List<Category> categories = categoryService.getAll();
 		return ResponseEntity.status(HttpStatus.OK).body(categories);
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<Category> findById(@PathVariable Integer id){
+	public ResponseEntity<Category> findById(@PathVariable Integer id) {
 		Category category = categoryService.findById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(category);
 	}
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Category> deleteById(@PathVariable Integer id){
+	public ResponseEntity<Category> deleteById(@PathVariable Integer id) {
 		categoryService.delete(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}

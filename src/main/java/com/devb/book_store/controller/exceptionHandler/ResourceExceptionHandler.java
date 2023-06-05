@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.devb.book_store.service.exception.DataIntegratyViolationException;
+import com.devb.book_store.service.exception.HttpRequestMethodNotSupportedException;
 import com.devb.book_store.service.exception.ObjectNotFoundException;
 
 @RestControllerAdvice
@@ -52,6 +53,15 @@ public class ResourceExceptionHandler {
 		validationError.setErrors(list);
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationError);
+
+	}
+	
+	@ExceptionHandler(org.springframework.web.HttpRequestMethodNotSupportedException.class)
+	public ResponseEntity<ResponseError> objectNotFoundException(org.springframework.web.HttpRequestMethodNotSupportedException ex) {
+		ResponseError respError = new ResponseError(LocalDate.now(), HttpStatus.METHOD_NOT_ALLOWED.value(),
+				ex.getMessage()+" to this endpoint");
+
+		return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(respError);
 
 	}
 

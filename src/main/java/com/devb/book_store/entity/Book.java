@@ -20,14 +20,27 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
+	private String name;
 	private String desc;
+	private String ref;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "book_id", referencedColumnName = "id")
 	private Category category;
+	
+	
 	@ManyToMany
 	private List<Author> authors = new ArrayList<>();
+
+	
+	
+	public String getRef() {
+		return ref;
+	}
+
+	public void setRef(String ref) {
+		this.ref = ref;
+	}
 
 	public Integer getId() {
 		return id;
@@ -37,12 +50,12 @@ public class Book {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String nome) {
+		this.name = nome;
 	}
 
 	public String getDesc() {
@@ -70,13 +83,14 @@ public class Book {
 		this.authors = authors;
 	}
 
-	public Book(Integer id, String nome, String desc, Category category, List<Author> authors) {
+	public Book(Integer id, String nome, String desc, Category category, List<Author> authors,String ref) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.name = nome;
 		this.desc = desc;
 		this.category = category;
 		this.authors = authors;
+		this.ref = ref;
 	}
 
 	public Book() {
