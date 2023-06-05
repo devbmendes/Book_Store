@@ -79,4 +79,7 @@ public class Book {
 		this.authors = authors;
 	}
 
+	public Book() {
+		
+	}
 }

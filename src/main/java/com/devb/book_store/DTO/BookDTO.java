@@ -16,7 +16,7 @@ public class BookDTO {
 	private Integer category_id;
 	@NotBlank
 	@NotEmpty
-	private Integer author_id[];
+	private Integer[] author_id;
 	
 	public String getNome() {
 		return nome;
