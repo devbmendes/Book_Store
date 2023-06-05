@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,9 +43,14 @@ public class BookController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<Book> findById(@RequestParam(value = "name") String name){
+	public ResponseEntity<Book> findByName(@RequestParam(value = "name") String name){
 		Book book = bookService.findByName(name);
 		return ResponseEntity.status(HttpStatus.OK).body(book);
+	}
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable Integer id){
+		bookService.delete(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 	
 }

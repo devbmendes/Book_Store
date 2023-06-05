@@ -24,7 +24,7 @@ public class Book {
 	private String desc;
 	private String ref;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "book_id", referencedColumnName = "id")
 	private Category category;
 	
