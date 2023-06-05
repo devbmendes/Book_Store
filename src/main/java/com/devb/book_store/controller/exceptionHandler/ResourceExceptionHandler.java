@@ -2,6 +2,7 @@ package com.devb.book_store.controller.exceptionHandler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.boot.context.properties.bind.BindResult;
@@ -34,16 +35,23 @@ public class ResourceExceptionHandler {
 		
 	}
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<ResponseError> objectNotFoundException(MethodArgumentNotValidException ex, BindingResult bindingResult){
+	public ResponseEntity<ResponseError> objectNotFoundException(MethodArgumentNotValidException ex){
 		ValidationError validationError = new ValidationError(LocalDate.now(),HttpStatus.BAD_REQUEST.value(),
-				"Validations Field Error");
+				"Validations Field Errors");
 		List<FieldError> list = new ArrayList<>();
-		FieldError fieldError = new FieldError();
+		BindingResult bindingResult = ex.getBindingResult();
+		for(org.springframework.validation.FieldError fieldError: bindingResult.getFieldErrors()) {
+			FieldError fError = new FieldError();
+			fError.setFieldname(fieldError.getField());
+			fError.setMessage(fieldError.getDefaultMessage());
+			list.add(fError);
+		}
 		
-		ex.getBindingResult().getAllErrors().forEach((error)->{
-			fieldError.setMessage(error.getDefaultMessage());
-			list.add(fieldError);
-		});
+//		ex.getBindingResult().getAllErrors().forEach((error)->{
+//			fieldError .setFieldname((org.springframework.validation.FieldError)error).getField().toString());
+//			fieldError.setMessage(error.getDefaultMessage());
+//			list.add(fieldError);
+//		});
 		
 		validationError.setErrors(list);
 		

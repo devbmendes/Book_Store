@@ -15,5 +15,9 @@ public interface CategoryService {
 	public Category update(Category category);
 
 	public void delete(Integer id);
+	
+	public Category findByType(String type);
+	
+	public Category ifIsPresent(String type);
 
 }

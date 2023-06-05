@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.devb.book_store.entity.Category;
 import com.devb.book_store.repository.CategoryRepository;
+import com.devb.book_store.service.exception.DataIntegratyViolationException;
 import com.devb.book_store.service.exception.ObjectNotFoundException;
 
 @Service
@@ -18,6 +19,8 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	public Category save(Category category) {
+		ifIsPresent(category.getType());
+		category.setId(null);
 		Category cat = categoryRepository.save(category);
 		return cat;
 	}
@@ -45,6 +48,21 @@ public class CategoryServiceImpl implements CategoryService{
 	public void delete(Integer id) {
 		Category category = findById(id);
 		categoryRepository.deleteById(category.getId());
+	}
+
+	@Override
+	public Category findByType(String type) {
+		Optional<Category> category = categoryRepository.findByType(type);
+		return category.orElseThrow(()->
+		new ObjectNotFoundException("Category : "+type+" not found"));
+	}
+
+	@Override
+	public void ifIsPresent(String type) {
+		Optional<Category> category = categoryRepository.findByType(type);
+		if(category.isPresent()) {
+			throw new DataIntegratyViolationException("Category already present in DB");
+		}
 	}
 
 }
