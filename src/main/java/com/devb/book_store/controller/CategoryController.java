@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.devb.book_store.entity.Category;
 import com.devb.book_store.service.CategoryService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/v1/store/category")
 public class CategoryController {
@@ -24,7 +26,7 @@ public class CategoryController {
 	CategoryService categoryService;
 	
 	@PostMapping
-	public ResponseEntity<Category> save(@RequestBody Category category){
+	public ResponseEntity<Category> save(@Valid	@RequestBody Category category){
 		Category ct = categoryService.save(category);
 		return ResponseEntity.status(HttpStatus.CREATED).body(ct);
 	}

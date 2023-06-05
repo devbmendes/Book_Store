@@ -1,11 +1,23 @@
 package com.devb.book_store.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
+
+@Data
 public class BookDTO {
 
+	@NotEmpty(message = "Field Required")
+	@NotBlank
 	private String nome;
 	private String desc;
+	@NotBlank
+	@NotEmpty
 	private Integer category_id;
+	@NotBlank
+	@NotEmpty
 	private Integer author_id[];
+	
 	public String getNome() {
 		return nome;
 	}
