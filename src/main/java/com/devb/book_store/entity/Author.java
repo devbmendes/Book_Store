@@ -27,9 +27,9 @@ public class Author {
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(
-			name="author_books",
+			name="author_book",
 			joinColumns =@JoinColumn(name="author_id"),
-			inverseJoinColumns = @JoinColumn(name = "books_id")
+			inverseJoinColumns = @JoinColumn(name = "book_id")
 			)
 	private List<Book> books = new ArrayList<>();
 

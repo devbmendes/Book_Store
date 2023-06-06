@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.devb.book_store.entity.Category;
@@ -46,8 +47,13 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	public void delete(Integer id) {
-		Category category = findById(id);
-		categoryRepository.deleteById(category.getId());
+		findById(id);
+		try {
+			categoryRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegratyViolationException("Object cannot be deleted : DB Rules ");
+		}
+		
 	}
 
 	@Override

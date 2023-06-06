@@ -26,7 +26,7 @@ public class ResourceExceptionHandler {
 	}
 
 	@ExceptionHandler(DataIntegratyViolationException.class)
-	public ResponseEntity<ResponseError> objectNotFoundException(DataIntegratyViolationException ex) {
+	public ResponseEntity<ResponseError> integrityViolation(DataIntegratyViolationException ex) {
 		ResponseError responseError = new ResponseError(LocalDate.now(), HttpStatus.BAD_REQUEST.value(),
 				ex.getMessage());
 
@@ -35,7 +35,7 @@ public class ResourceExceptionHandler {
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<ResponseError> objectNotFoundException(MethodArgumentNotValidException ex) {
+	public ResponseEntity<ResponseError> validationFields(MethodArgumentNotValidException ex) {
 		ValidationError validationError = new ValidationError(LocalDate.now(), HttpStatus.BAD_REQUEST.value(),
 				"Validations Field Errors");
 		
@@ -56,7 +56,7 @@ public class ResourceExceptionHandler {
 	}
 	
 	@ExceptionHandler(org.springframework.web.HttpRequestMethodNotSupportedException.class)
-	public ResponseEntity<ResponseError> objectNotFoundException(org.springframework.web.HttpRequestMethodNotSupportedException ex) {
+	public ResponseEntity<ResponseError> methodNotAllowed(org.springframework.web.HttpRequestMethodNotSupportedException ex) {
 		ResponseError respError = new ResponseError(LocalDate.now(), HttpStatus.METHOD_NOT_ALLOWED.value(),
 				ex.getMessage()+" to this endpoint");
 

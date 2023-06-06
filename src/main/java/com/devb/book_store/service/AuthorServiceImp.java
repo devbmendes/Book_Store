@@ -53,7 +53,7 @@ public class AuthorServiceImp implements AuthorService {
 	public Author save(AuthorDTO authorDTO) {
 		Optional<Author> at = authorRepositoy.findByEmail(authorDTO.getEmail());
 		if (at.isPresent()) {
-			throw new DataIntegratyViolationException("EMAIL : " + authorDTO.getEmail() + "already exist");
+			throw new DataIntegratyViolationException("EMAIL : " + authorDTO.getEmail() + " already exist");
 		}
 		Author author = new Author(null, authorDTO.getFirstname(), authorDTO.getLastname(), authorDTO.getEmail());
 
@@ -74,7 +74,7 @@ public class AuthorServiceImp implements AuthorService {
 		try {
 			authorRepositoy.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DataIntegratyViolationException("OBject cannot be deleted");
+			throw new DataIntegratyViolationException("Object cannot be deleted : DB Rules ");
 		}
 		
 		

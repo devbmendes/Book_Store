@@ -18,14 +18,14 @@ import jakarta.persistence.Table;
 public class Book {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String name;
 	private String desc;
 	private String ref;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "book_id", referencedColumnName = "id")
+	@JoinColumn(name = "category_id", referencedColumnName = "id")
 	private Category category;
 	
 	

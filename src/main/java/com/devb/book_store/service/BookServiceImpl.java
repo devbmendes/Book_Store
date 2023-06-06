@@ -80,8 +80,6 @@ public class BookServiceImpl  implements BookService{
 	public void delete(Integer id) {
 		getById(id);
 		bookRepo.deleteById(id);
-		
-		
 	}
 
 }
