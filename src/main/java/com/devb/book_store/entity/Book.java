@@ -32,7 +32,7 @@ public class Book {
 	private Category category;
 	
 	
-	@ManyToMany(mappedBy = "books", cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy = "books", cascade = {CascadeType.PERSIST,CascadeType.MERGE})
 	@JsonIgnore
 	private List<Author> authors = new ArrayList<>();
 
@@ -78,7 +78,6 @@ public class Book {
 		this.category = category;
 	}
 
-	@ManyToMany(mappedBy = "books")
 	public List<Author> getAuthors() {
 		return authors;
 	}

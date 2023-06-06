@@ -43,7 +43,7 @@ public class AuthorServiceImp implements AuthorService {
 
 	@Override
 	public Author update(Integer id, AuthorDTO authorDTO) {
-		
+
 		checkIfEmailisPresent(authorDTO.getEmail(), id);
 		Author author = new Author(id, authorDTO.getFirstname(), authorDTO.getLastname(), authorDTO.getEmail());
 		return authorRepositoy.save(author);
@@ -73,10 +73,8 @@ public class AuthorServiceImp implements AuthorService {
 		findById(id);
 		try {
 			authorRepositoy.deleteById(id);
-		} catch (DataIntegrityViolationException e) {
+		} catch (DataIntegratyViolationException e) {
 			throw new DataIntegratyViolationException("Object cannot be deleted : DB Rules ");
 		}
-		
-		
 	}
 }

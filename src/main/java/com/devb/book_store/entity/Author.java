@@ -1,8 +1,8 @@
 package com.devb.book_store.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -26,7 +26,7 @@ public class Author {
 	private String lastname;
 	private String email;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="author_book",
 			joinColumns= {
 				@JoinColumn(name="author_id",referencedColumnName = "id")	
@@ -35,7 +35,7 @@ public class Author {
 					@JoinColumn(name="book_id", referencedColumnName = "id")
 			}
 			)
-	private List<Book> books = new ArrayList<>();
+	private Set<Book> books = new HashSet<>();
 
 	public Integer getId() {
 		return id;
