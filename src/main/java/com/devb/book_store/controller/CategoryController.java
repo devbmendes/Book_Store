@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devb.book_store.entity.Category;
@@ -47,6 +48,11 @@ public class CategoryController {
 	public ResponseEntity<Category> deleteById(@PathVariable Integer id) {
 		categoryService.delete(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
+	@GetMapping
+	public ResponseEntity<Category> findByname(@RequestParam String name){
+		Category category = categoryService.findByTypeIgnoreCase(name);
+		return ResponseEntity.status(HttpStatus.OK).body(category);
 	}
 
 }

@@ -8,5 +8,5 @@ import com.devb.book_store.entity.Author;
 
 public interface AuthorRepositoy extends JpaRepository<Author, Integer> {
 
-	public Optional<Author> findByEmail(String email);
+	public Optional<Author> findByEmailIgnoreCase(String email);
 }

@@ -57,15 +57,15 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public Category findByType(String type) {
-		Optional<Category> category = categoryRepository.findByType(type);
+	public Category findByTypeIgnoreCase(String type) {
+		Optional<Category> category = categoryRepository.findByTypeIgnoreCase(type);
 		return category.orElseThrow(()->
 		new ObjectNotFoundException("Category : "+type+" not found"));
 	}
 
 	@Override
 	public void ifIsPresent(String type) {
-		Optional<Category> category = categoryRepository.findByType(type);
+		Optional<Category> category = categoryRepository.findByTypeIgnoreCase(type);
 		if(category.isPresent()) {
 			throw new DataIntegratyViolationException("Category already present in DB");
 		}

@@ -13,7 +13,7 @@ public interface BookService {
 	
 	public Book getById(Integer id);
 	
-	public Book findByName(String name);
+	public Book findByNameIgnoreCase(String name);
 	
 	public void delete(Integer id);
 

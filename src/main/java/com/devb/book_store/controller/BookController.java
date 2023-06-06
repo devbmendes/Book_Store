@@ -44,7 +44,7 @@ public class BookController {
 	
 	@GetMapping
 	public ResponseEntity<Book> findByName(@RequestParam(value = "name") String name){
-		Book book = bookService.findByName(name);
+		Book book = bookService.findByNameIgnoreCase(name);
 		return ResponseEntity.status(HttpStatus.OK).body(book);
 	}
 	@DeleteMapping("/{id}")

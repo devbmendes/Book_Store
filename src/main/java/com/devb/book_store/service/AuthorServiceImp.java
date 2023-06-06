@@ -21,7 +21,7 @@ public class AuthorServiceImp implements AuthorService {
 
 	@Override
 	public Author findByEmail(String email) {
-		Optional<Author> autorOptional = authorRepositoy.findByEmail(email);
+		Optional<Author> autorOptional = authorRepositoy.findByEmailIgnoreCase(email);
 
 		return autorOptional
 				.orElseThrow(() -> new ObjectNotFoundException("Author with EMAIL: " + email + "not found"));
@@ -51,7 +51,7 @@ public class AuthorServiceImp implements AuthorService {
 
 	@Override
 	public Author save(AuthorDTO authorDTO) {
-		Optional<Author> at = authorRepositoy.findByEmail(authorDTO.getEmail());
+		Optional<Author> at = authorRepositoy.findByEmailIgnoreCase(authorDTO.getEmail());
 		if (at.isPresent()) {
 			throw new DataIntegratyViolationException("EMAIL : " + authorDTO.getEmail() + " already exist");
 		}
@@ -62,7 +62,7 @@ public class AuthorServiceImp implements AuthorService {
 
 	@Override
 	public void checkIfEmailisPresent(String email, Integer id) {
-		Optional<Author> authorOptional = authorRepositoy.findByEmail(email);
+		Optional<Author> authorOptional = authorRepositoy.findByEmailIgnoreCase(email);
 		if (authorOptional.isPresent() && !authorOptional.get().getId().equals(id)) {
 			throw new DataIntegratyViolationException("Author with EMAIL : " + email + " is already Present");
 		}

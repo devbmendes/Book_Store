@@ -70,7 +70,7 @@ public class BookServiceImpl  implements BookService{
 	}
 
 	@Override
-	public Book findByName(String name) {
+	public Book findByNameIgnoreCase(String name) {
 		Optional<Book> book = bookRepo.findByNameIgnoreCase(name);
 		return book.orElseThrow(()->
 		new ObjectNotFoundException("Book with Name: "+name+" not found"));

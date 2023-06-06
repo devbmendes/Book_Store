@@ -16,7 +16,7 @@ public interface CategoryService {
 
 	public void delete(Integer id);
 	
-	public Category findByType(String type);
+	public Category findByTypeIgnoreCase(String type);
 	
 	public void ifIsPresent(String type);
 
