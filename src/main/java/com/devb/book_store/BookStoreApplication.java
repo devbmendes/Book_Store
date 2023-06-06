@@ -9,7 +9,6 @@ import com.devb.book_store.entity.Category;
 import com.devb.book_store.repository.AuthorRepositoy;
 import com.devb.book_store.repository.CategoryRepository;
 
-
 @SpringBootApplication
 public class BookStoreApplication implements CommandLineRunner {
 	
