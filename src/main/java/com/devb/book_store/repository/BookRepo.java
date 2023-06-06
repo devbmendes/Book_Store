@@ -8,6 +8,6 @@ import com.devb.book_store.entity.Book;
 
 public interface BookRepo extends JpaRepository<Book, Integer> {
 	
-	public Optional<Book> findByName(String nome);
+	public Optional<Book> findByNameIgnoreCase(String nome);
 
 }
