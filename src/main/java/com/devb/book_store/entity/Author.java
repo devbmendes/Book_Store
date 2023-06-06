@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,11 +26,14 @@ public class Author {
 	private String lastname;
 	private String email;
 	
-	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(
-			name="author_book",
-			joinColumns =@JoinColumn(name="author_id"),
-			inverseJoinColumns = @JoinColumn(name = "book_id")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinTable(name="author_book",
+			joinColumns= {
+				@JoinColumn(name="author_id",referencedColumnName = "id")	
+			},
+			inverseJoinColumns = {
+					@JoinColumn(name="book_id", referencedColumnName = "id")
+			}
 			)
 	private List<Book> books = new ArrayList<>();
 
