@@ -2,9 +2,9 @@
  <p>This is an API with Spring Boot 3.0 in order to implement relational database knowledge with the Hibernate framework.
 As the image below shows, the author table has a many-to-many relationship with the book table, consequently generating an intermediate book_author table and finally the book table has a one-to-many relationship with the category table.<p>
 
+<img height="350px" widght="500px" src="https://github.com/devbmendes/Book_Store/assets/57733068/3c99fc86-c09c-467c-85db-eae1746219b4">
   
-  
-### Technology used:
+## Technology used:
 
  - Spring Boot 3.0
  - Spring Web
